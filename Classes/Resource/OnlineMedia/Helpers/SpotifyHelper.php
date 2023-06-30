@@ -25,7 +25,9 @@ class SpotifyHelper extends AbstractOEmbedHelper
     {
         $mediaId = null;
 
-        if (preg_match('/^https?:\/\/open\.spotify\.com\/embed\/playlist\/(.*)/i', $url, $match)) {
+        if (preg_match('/^https?:\/\/open\.spotify\.com\/playlist\/(.*)/i', $url, $match)) {
+            $mediaId = $match[1];
+        } else if (preg_match('/^https?:\/\/open\.spotify\.com\/embed\/playlist\/(.*)/i', $url, $match)) {
             $mediaId = $match[1];
         } else if (preg_match('/^https?:\/\/open\.spotify\.com\/embed\/album\/(.*)/i', $url, $match)) {
             $mediaId = $match[1];
@@ -54,18 +56,12 @@ class SpotifyHelper extends AbstractOEmbedHelper
         $temporaryFileName = $this->getTempFolderPath() . 'spotify_' . md5($mediaId) . '.jpg';
 
         if (!file_exists($temporaryFileName)) {
-            $tryNames = ['maxresdefault.jpg', 'mqdefault.jpg', '0.jpg'];
-            foreach ($tryNames as $tryName) {
-
-                $emmbedUrl = $this->getOEmbedUrl($mediaId);
-                $data = GeneralUtility::getUrl($emmbedUrl);
-                $jsonData = json_decode($data, true, 512, JSON_THROW_ON_ERROR);
-
-                $previewImage = GeneralUtility::getUrl($jsonData['thumbnail_url']);
+            $oEmbedData = $this->getOEmbedData($mediaId);
+            if (!empty($oEmbedData['thumbnail_url'])) {
+                $previewImage = GeneralUtility::getUrl($oEmbedData['thumbnail_url']);
                 if ($previewImage !== false) {
                     file_put_contents($temporaryFileName, $previewImage);
                     GeneralUtility::fixPermissions($temporaryFileName);
-                    break;
                 }
             }
         }
@@ -121,7 +117,7 @@ class SpotifyHelper extends AbstractOEmbedHelper
     {
         return sprintf(
             'https://open.spotify.com/oembed?url=%s',
-            rawurlencode(sprintf('https://open.spotify.com/show/%s', rawurlencode($mediaId))),
+            rawurlencode(sprintf('https://open.spotify.com/playlist/%s', rawurlencode($mediaId))),
         );
     }
 }

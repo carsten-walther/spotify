@@ -113,7 +113,7 @@ class SpotifyRenderer implements FileRendererInterface
     protected function createSpotifyUrl(array $options, FileInterface $file): string
     {
         $mediaId = $this->getMediaIdFromFile($file);
-        return sprintf('https://open.spotify.com/embed/show/%s?utm_source=oembed', $mediaId);
+        return sprintf('https://open.spotify.com/embed/playlist/%s?utm_source=oembed', $mediaId);
     }
 
     /**
