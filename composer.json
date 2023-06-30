@@ -1,0 +1,33 @@
+{
+	"name": "carsten-walther/spotify",
+	"type": "typo3-cms-extension",
+	"description": "Spotify to the masses.",
+	"keywords": [
+		"TYPO3",
+		"extension",
+		"spotify",
+		"playlist"
+	],
+	"homepage": "https://carstenwalther.de",
+	"license": "GPL-3.0-or-later",
+	"require": {
+		"php": "^7.4 || ^8.1 || ^8.2",
+		"typo3/cms-core": "^10.4 || ^12.4",
+		"typo3/cms-extbase": "^10.4 || ^12.4"
+	},
+	"extra": {
+		"typo3/cms": {
+			"extension-key": "spotify"
+		}
+	},
+	"autoload" : {
+		"psr-4" : {
+			"CarstenWalther\\Spotify\\" : "Classes/"
+		}
+	},
+	"minimum-stability" : "stable",
+	"authors" : [{
+		"name" : "Carsten Walther",
+		"email" : "walther.carsten@web.de"
+	}]
+}
