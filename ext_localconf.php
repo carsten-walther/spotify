@@ -9,7 +9,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['mediafile_ext'] .= ',spotify';
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['fal']['onlineMediaHelpers']['spotify'] = \CarstenWalther\Spotify\Resource\OnlineMedia\Helpers\SpotifyHelper::class;
 
 // Add spotify as own mimetype
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['FileInfo']['fileExtensionToMimeType']['spotify'] = 'image/spotify';
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['FileInfo']['fileExtensionToMimeType']['spotify'] = 'audio/spotify';
 
 // register file extension
 $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
